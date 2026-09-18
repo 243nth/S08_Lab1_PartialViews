@@ -20,19 +20,25 @@ namespace ZombieParty.Controllers
             return View(weapons);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            if (id==null|| id==0)
+            {
+                return View(new Weapon());
+            }
+            
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Create(Weapon weapon)
+        public IActionResult Upsert(Weapon weapon)
         {
             if (ModelState.IsValid)
             {
                 // Ajouter à la BD
                 _baseDonnees.Weapons.Add(weapon);
                 TempData["Success"] = $"{weapon.Name} weapon added";
+                _baseDonnees.Weapons.Update(weapon);
 
                 _baseDonnees.SaveChanges();
 
