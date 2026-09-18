@@ -26,6 +26,8 @@ namespace ZombieParty.Models
         public virtual ZombieType? ZombieType { get; set; }
 
         [ValidateNever] 
-        public List<HuntingLog> HuntingLogs { get; set; }
+        public virtual List<HuntingLog> HuntingLogs { get; set; }
+
+        public int Force { get; set; }
     }
 }
